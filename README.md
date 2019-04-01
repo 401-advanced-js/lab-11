@@ -7,13 +7,11 @@
 
 ### Links and Resources
 * [repo](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+* [![Build Status](https://travis-ci.com/401-advanced-js/lab-11.svg?branch=master)](https://travis-ci.com/401-advanced-js/lab-11)
+* [back-end](https://blueberry-shortcake-12572.herokuapp.com/)
 
 #### Documentation
-* [swagger](http://xyz.com) (API assignments only)
-* [jsdoc](http://xyz.com) (All assignments)
+* [jsdoc](https://blueberry-shortcake-12572.herokuapp.com/docs)
 
 ### Modules
 #### `modulename.js`
@@ -31,16 +29,12 @@ Usage Notes or examples
 * `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+* `npm i`
+* 
   
 #### Tests
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
+* `npm run test`
+* `npm run lint`
 
 #### UML
-Link to an image of the UML for your application and response to events
+
