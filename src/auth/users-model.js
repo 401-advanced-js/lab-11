@@ -1,6 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const users = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
@@ -9,6 +11,10 @@ const users = new mongoose.Schema({
   role: {type: String, required:true, default:'user', enum:['admin','editor','user'] },
 });
 
+/**
+ * Saves the password in hashed
+ * @callback {function} next
+ */
 users.pre('save', function(next) {
   bcrypt.hash(this.password,10)
     .then(hashedPassword => {
@@ -18,6 +24,9 @@ users.pre('save', function(next) {
     .catch( error => {throw error;} );
 });
 
+/**
+ * Authenticates user
+ */
 users.statics.authenticateBasic = function(auth) {
   let query = {username:auth.username};
   return this.findOne(query)
@@ -25,12 +34,18 @@ users.statics.authenticateBasic = function(auth) {
     .catch(console.error);
 };
 
-// Compare a plain text password against the hashed one we have saved
+
+/**
+ * Compare a plain text password against the hashed one we have saved
+ */
 users.methods.comparePassword = function(password) {
-  return bcrypt.compare(password, this.password);
+  return bcrypt.compare(password, this.password)
+    .then(valid => valid? this:null);
 };
 
-// Generate a JWT from the user id and a secret
+/** 
+ * Generate a JWT from the user id and a secret
+ */ 
 users.methods.generateToken = function() {
   let tokenData = {
     id:this._id,
