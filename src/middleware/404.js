@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Not found response
+ * @param {object} req
+ * @param {object} res
+ * @callback {next} next
+ * @returns {object} res object
+ */
 module.exports = (req,res,next) => {
   let error = { error: 'Resource Not Found' };
   res.statusCode = 404;
